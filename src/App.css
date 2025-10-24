@@ -3,39 +3,56 @@
   --dark: #0d2a3b;
 }
 
+/* ============================= */
+/* GLOBAL */
+/* ============================= */
 body {
   margin: 0;
   font-family: 'Segoe UI', sans-serif;
   color: var(--dark);
 }
 
-/* Header Section */
+/* (Optional, only if you use .title in markup) */
+.title { color: var(--accent); }
+
+/* ============================= */
+/* HEADER */
+/* ============================= */
 .header-text {
-  max-width: 900px;
-  margin: 2rem auto 1rem;
+  background-color: var(--dark);
+  color: #ffffff;
+  max-width: 100%;
+  margin: 0;
+  padding: 2.5rem 1rem 2rem;
   text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
 .header-text p {
   line-height: 1.6;
-  margin: 0.4rem 0;
-  color: var(--dark);
+  margin: 0.6rem auto;
+  color: rgba(255, 255, 255, 0.9);
 }
 
 .header-text .subtext {
   max-width: 700px;
-  margin: 0.5rem auto;
+  margin: 0.75rem auto;
   font-size: 0.95rem;
-  color: var(--dark);
+  color: rgba(255, 255, 255, 0.85);
 }
 
 .header-text .stat {
-  margin-top: 1rem;
+  margin-top: 1.25rem;
   font-weight: 500;
-  color: var(--dark);
+  color: #ffffff;
 }
 
-/* Layout */
+.header-text .stat b { color: #ffffff; }
+.header-text .stat span { color: rgba(255, 255, 255, 0.7); }
+
+/* ============================= */
+/* PAGE LAYOUT */
+/* ============================= */
 .calculator-layout {
   display: flex;
   flex-wrap: wrap;
@@ -46,9 +63,10 @@ body {
   padding: 0 1rem;
 }
 
-/* LEFT CALCULATOR SECTION */
+/* ============================= */
+/* CALCULATOR (LEFT) */
+/* ============================= */
 .calculator {
-  background: white;
   border: none;
   border-radius: 10px;
   padding: 1.5rem;
@@ -63,15 +81,24 @@ body {
   margin-bottom: 1rem;
 }
 
-/* Labels + Questions */
-label {
-  color: var(--dark);
+/* Form spacing inside calculator */
+.calculator .form-group { margin-bottom: 1.5rem; }
+
+/* Larger labels in calculator */
+.calculator label {
+  font-size: 1.1rem;
   font-weight: 600;
+  color: var(--dark);
+  margin-bottom: 0.4rem;
   display: block;
-  margin-bottom: 0.3rem;
+}
+.calculator h2 {
+  margin-bottom: 1rem;
 }
 
-/* Radio Groups */
+/* ============================= */
+/* RADIO GROUPS */
+/* ============================= */
 .radio-group {
   display: flex;
   flex-wrap: wrap;
@@ -80,7 +107,7 @@ label {
 }
 
 .radio-box {
-  flex: 0 1 calc((100% - (0.5rem * 2)) / 3); /* 3 boxes per row accounting for gap */
+  flex: 0 1 calc((100% - (0.5rem * 2)) / 3); /* 3 per row accounting for gaps */
   box-sizing: border-box;
   text-align: center;
   border: 2px solid var(--accent);
@@ -95,47 +122,19 @@ label {
   align-items: center;
 }
 
-.radio-box.active {
-  background: var(--accent);
-  color: white;
-}
+.radio-box.active { background: var(--accent); color: #fff; }
+.radio-box input { display: none; }
 
-.radio-box input {
-  display: none;
-}
+/* ============================= */
+/* SLIDER + TICKS */
+/* ============================= */
 
-/* Sliders */
-input[type="range"] {
-  -webkit-appearance: none;
-  width: 100%;
-  height: 6px;
-  border-radius: 3px;
-  background: linear-gradient(to right, var(--accent) var(--percent, 50%), #ddd var(--percent, 50%));
-  cursor: pointer;
-  outline: none;
-}
-
-input[type="range"]::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  background: var(--accent);
-  border: none;
-}
-
-
-:root {
-  --accent: #f26d24; /* orange */
-  --dark: #0d2a3b;   /* blue */
-}
-
-/* --- Container for the slider, ticks, and value --- */
+/* Container for the slider, ticks, and fixed value */
 .slider-wrapper {
-  --ends-inset: 3px;        /* tweak this to nudge the 0/100 ticks inward/outward */
-  --tick-height: 10px;      /* length of the orange tick line */
-  --tick-thickness: 2px;    /* thickness of the orange tick line */
-  --tick-gap: 6px;          /* space between slider and the tick number row */
+  --ends-inset: 3px;      /* nudges the 0/100 ticks inward */
+  --tick-gap: 6px;        /* space between slider and the tick number row */
+  --tick-height: 10px;    /* tick line length */
+  --tick-thickness: 2px;  /* tick line width */
 
   position: relative;
   width: 100%;
@@ -144,10 +143,10 @@ input[type="range"]::-webkit-slider-thumb {
   align-items: center;
 }
 
-/* Optional: we’re not using the overlay anymore */
+/* (Overlay not used, but exists in markup) */
 .tick-overlay { display: none; }
 
-/* --- The slider itself --- */
+/* Slider track */
 .slider-wrapper input[type="range"] {
   -webkit-appearance: none;
   appearance: none;
@@ -162,7 +161,7 @@ input[type="range"]::-webkit-slider-thumb {
   cursor: pointer;
 }
 
-/* Thumb (WebKit) */
+/* Slider thumbs */
 .slider-wrapper input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
   width: 18px;
@@ -171,8 +170,6 @@ input[type="range"]::-webkit-slider-thumb {
   background: var(--accent);
   border: none;
 }
-
-/* Thumb (Firefox) */
 .slider-wrapper input[type="range"]::-moz-range-thumb {
   width: 18px;
   height: 18px;
@@ -181,7 +178,7 @@ input[type="range"]::-webkit-slider-thumb {
   border: none;
 }
 
-/* --- Row of labels (0,25,50,75,100) --- */
+/* Tick numbers row */
 .slider-ticks {
   display: flex;
   justify-content: space-between;
@@ -199,15 +196,16 @@ input[type="range"]::-webkit-slider-thumb {
   font-weight: 600;
   text-align: center;
 }
-/* Nudge number labels 25, 50, 75, 100 slightly right to match tick marks */
+
+/* If you nudged ticks for alignment earlier, keep this */
 .slider-ticks span:nth-child(2),
 .slider-ticks span:nth-child(3),
 .slider-ticks span:nth-child(4),
 .slider-ticks span:nth-child(5) {
-  transform: translateX(5px); /* same offset you used for the ticks */
+  transform: translateX(5px);
 }
 
-
+/* Orange tick line above each number */
 .slider-ticks span::before {
   content: "";
   position: absolute;
@@ -220,8 +218,7 @@ input[type="range"]::-webkit-slider-thumb {
   border-radius: 1px;
 }
 
-
-/* --- The boxed slider value under the slider (if you use it) --- */
+/* Fixed number box under the slider (if used) */
 .slider-value {
   margin-top: 0.4rem;
   padding: 3px 8px;
@@ -237,14 +234,9 @@ input[type="range"]::-webkit-slider-thumb {
   align-self: center;
 }
 
-
-
-
-
-
-
-
-/* Input fields */
+/* ============================= */
+/* SHARED INPUTS */
+/* ============================= */
 input[type="number"],
 input[type="text"],
 input[type="email"] {
@@ -256,12 +248,11 @@ input[type="email"] {
   margin-top: 0.3rem;
 }
 
-.note {
-  font-size: 0.85rem;
-  color: var(--dark);
-}
+.note { font-size: 0.85rem; color: var(--dark); }
 
-/* Results */
+/* ============================= */
+/* RESULTS */
+/* ============================= */
 .result-inline {
   margin-top: 1.25rem;
   font-weight: bold;
@@ -271,19 +262,17 @@ input[type="email"] {
   color: var(--dark);
 }
 
-.cost {
-  color: var(--accent);
-  font-size: 1.5rem;
-}
+.cost { color: var(--accent); font-size: 1.5rem; }
 
-/* RIGHT SIDE LEAD FORM */
+/* ============================= */
+/* LEAD FORM (RIGHT) */
+/* ============================= */
 .lead-form {
   background: #fff3ec;
   border: 2px solid var(--accent);
   border-radius: 10px;
   padding: 1.2rem 1.5rem;
   width: 340px;
-  height: auto;
   align-self: flex-start;
 }
 
@@ -299,10 +288,19 @@ input[type="email"] {
   margin-bottom: 1rem;
 }
 
+/* center the form inputs */
 .lead-form form {
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 0.6rem;
+}
+
+.lead-form input[type="text"],
+.lead-form input[type="email"] {
+  width: 90%;
+  max-width: 300px;
+  text-align: center;
 }
 
 .lead-form button {
@@ -317,17 +315,12 @@ input[type="email"] {
   width: 100%;
 }
 
-.lead-form button:hover {
-  background: #e05e19;
-}
+.lead-form button:hover { background: #e05e19; }
+.thank-you { color: var(--accent); font-weight: 600; text-align: center; }
 
-.thank-you {
-  color: var(--accent);
-  font-weight: 600;
-  text-align: center;
-}
-
-/* Responsive layout */
+/* ============================= */
+/* RESPONSIVE */
+/* ============================= */
 @media (max-width: 768px) {
   .calculator-layout {
     flex-direction: column;

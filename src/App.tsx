@@ -54,27 +54,27 @@ export default function ProcessCostCalculator() {
 
   return (
     <div className="page-wrapper">
-      <div className="header-text">
-        <h1>Process Cost Calculator</h1>
-        <p>This tool will help you calculate exactly how much a process is currently costing you.</p>
-        <p className="subtext">
-          We can help you reduce your process time substantially. We are experts in automation, integrations, and
-          workflow improvement. Our list continues to grow. Learn more about why optimizing your processes saves both
-          time and money.
-        </p>
-        <p className="stat">
-          Average Annual Hourly Earnings for 2024 = <b>$33.48</b><br />
-          <span>(Per US Bureau of Labor Statistics)</span>
-        </p>
-      </div>
+      <section className="dark-section">
+        <div className="header-text">
+          <h1 className="title">PROCESS COST CALCULATOR</h1>
+          <p>This tool will help you calculate exactly how much a process is currently costing you.</p>
+          <p className="subtext">
+            We can help you reduce your process time substantially. We are experts in automation, integrations, and
+            workflow improvement. Our list continues to grow. Learn more about why optimizing your processes saves both
+            time and money.
+          </p>
+          <p className="stat">
+            Average Annual Hourly Earnings for 2024 = <b>$33.48</b><br />
+            <span>(Per US Bureau of Labor Statistics)</span>
+          </p>
+        </div>
+      </section>
 
       <div className="calculator-layout">
         {/* LEFT SIDE */}
         <div className="calculator">
-          <h2>Process Cost Analysis</h2>
-
           <div className="form-group">
-            <label>1. My Process is measured in *</label>
+            <h2>1. My Process is measured in *</h2>
             <div className="radio-group">
               {TIME_UNITS.map((unit) => (
                 <label key={unit} className={`radio-box ${timeUnit === unit ? 'active' : ''}`}>
@@ -86,7 +86,7 @@ export default function ProcessCostCalculator() {
           </div>
 
           <div className="form-group">
-            <label>2. Per *</label>
+            <h2>2. Per *</h2>
             <div className="radio-group">
               {PERIODS.map((p) => (
                 <label key={p} className={`radio-box ${period === p ? 'active' : ''}`}>
@@ -98,7 +98,7 @@ export default function ProcessCostCalculator() {
           </div>
           {/* Process Time Slider */}
           <div className="form-group slider-group">
-            <label>3. Process Time in [{timeUnit}]</label>
+            <h2>3. Process Time in [{timeUnit}]</h2>
             <div className="slider-wrapper">
               <div className="tick-overlay" aria-hidden="true"></div>
               <input
@@ -121,7 +121,7 @@ export default function ProcessCostCalculator() {
 
           {/* Process Count Slider */}
           <div className="form-group slider-group">
-            <label>4. Process Count per [{period}]</label>
+            <h2>4. Process Count per [{period}]</h2>
             <div className="slider-wrapper">
               <div className="tick-overlay" aria-hidden="true"></div>
               <input
@@ -142,9 +142,8 @@ export default function ProcessCostCalculator() {
             </div>
           </div>
 
-
           <div className="form-group">
-            <label>5. Employee Wage per Hour *</label>
+            <h2>5. Employee Wage per Hour *</h2>
             <p className="note">
               Average national hourly wage is <b>$32.05</b><br />
               <span>(Based on 2023 National Wage Index by the Social Security Administration)</span>
@@ -152,10 +151,6 @@ export default function ProcessCostCalculator() {
             <input type="number" value={wage} onChange={(e) => setWage(Number(e.target.value))} />
           </div>
 
-          <div className="result-inline">
-            <label>Estimated Cost:</label>
-            <span className="cost">${totalCost?.toFixed(2) ?? '0.00'}</span>
-          </div>
         </div>
 
         {/* RIGHT SIDE FORM */}
@@ -166,14 +161,14 @@ export default function ProcessCostCalculator() {
             <form onSubmit={handleSubmit}>
               <input
                 type="text"
-                placeholder="Your Name"
+                placeholder="Name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 required
               />
               <input
                 type="email"
-                placeholder="Your Email"
+                placeholder="Email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
