@@ -1,0 +1,341 @@
+:root {
+  --accent: #f26d24;
+  --dark: #0d2a3b;
+}
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  color: var(--dark);
+}
+
+/* Header Section */
+.header-text {
+  max-width: 900px;
+  margin: 2rem auto 1rem;
+  text-align: center;
+}
+
+.header-text p {
+  line-height: 1.6;
+  margin: 0.4rem 0;
+  color: var(--dark);
+}
+
+.header-text .subtext {
+  max-width: 700px;
+  margin: 0.5rem auto;
+  font-size: 0.95rem;
+  color: var(--dark);
+}
+
+.header-text .stat {
+  margin-top: 1rem;
+  font-weight: 500;
+  color: var(--dark);
+}
+
+/* Layout */
+.calculator-layout {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+/* LEFT CALCULATOR SECTION */
+.calculator {
+  background: white;
+  border: none;
+  border-radius: 10px;
+  padding: 1.5rem;
+  flex: 1 1 600px;
+  min-width: 340px;
+}
+
+.calculator h2 {
+  color: var(--dark);
+  text-align: left;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+/* Labels + Questions */
+label {
+  color: var(--dark);
+  font-weight: 600;
+  display: block;
+  margin-bottom: 0.3rem;
+}
+
+/* Radio Groups */
+.radio-group {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* no stretching */
+  gap: 0.5rem;
+}
+
+.radio-box {
+  flex: 0 1 calc((100% - (0.5rem * 2)) / 3); /* 3 boxes per row accounting for gap */
+  box-sizing: border-box;
+  text-align: center;
+  border: 2px solid var(--accent);
+  border-radius: 6px;
+  padding: 0.5rem 0;
+  cursor: pointer;
+  font-weight: 500;
+  color: var(--dark);
+  transition: 0.2s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.radio-box.active {
+  background: var(--accent);
+  color: white;
+}
+
+.radio-box input {
+  display: none;
+}
+
+/* Sliders */
+input[type="range"] {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 6px;
+  border-radius: 3px;
+  background: linear-gradient(to right, var(--accent) var(--percent, 50%), #ddd var(--percent, 50%));
+  cursor: pointer;
+  outline: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: none;
+}
+
+
+:root {
+  --accent: #f26d24; /* orange */
+  --dark: #0d2a3b;   /* blue */
+}
+
+/* --- Container for the slider, ticks, and value --- */
+.slider-wrapper {
+  --ends-inset: 3px;        /* tweak this to nudge the 0/100 ticks inward/outward */
+  --tick-height: 10px;      /* length of the orange tick line */
+  --tick-thickness: 2px;    /* thickness of the orange tick line */
+  --tick-gap: 6px;          /* space between slider and the tick number row */
+
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Optional: we’re not using the overlay anymore */
+.tick-overlay { display: none; }
+
+/* --- The slider itself --- */
+.slider-wrapper input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 6px;
+  margin: 0;
+  background: linear-gradient(to right, var(--accent) var(--percent, 50%), #ddd var(--percent, 50%));
+  border-radius: 3px;
+  outline: none;
+  position: relative;
+  z-index: 1;
+  cursor: pointer;
+}
+
+/* Thumb (WebKit) */
+.slider-wrapper input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: none;
+}
+
+/* Thumb (Firefox) */
+.slider-wrapper input[type="range"]::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: none;
+}
+
+/* --- Row of labels (0,25,50,75,100) --- */
+.slider-ticks {
+  display: flex;
+  justify-content: space-between;
+  width: calc(100% - (var(--ends-inset, 0px) * 2));
+  margin-top: var(--tick-gap, 6px);
+  padding-left: var(--ends-inset, 0px);
+  padding-right: var(--ends-inset, 0px);
+  position: relative;
+}
+
+.slider-ticks span {
+  position: relative;
+  font-size: 0.85rem;
+  color: var(--dark);
+  font-weight: 600;
+  text-align: center;
+}
+/* Nudge number labels 25, 50, 75, 100 slightly right to match tick marks */
+.slider-ticks span:nth-child(2),
+.slider-ticks span:nth-child(3),
+.slider-ticks span:nth-child(4),
+.slider-ticks span:nth-child(5) {
+  transform: translateX(5px); /* same offset you used for the ticks */
+}
+
+
+.slider-ticks span::before {
+  content: "";
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: var(--tick-thickness, 2px);
+  height: var(--tick-height, 10px);
+  background: var(--accent);
+  border-radius: 1px;
+}
+
+
+/* --- The boxed slider value under the slider (if you use it) --- */
+.slider-value {
+  margin-top: 0.4rem;
+  padding: 3px 8px;
+  border: 1px solid var(--accent);
+  border-radius: 6px;
+  background: #fff;
+  color: var(--accent);
+  font-weight: 600;
+  font-size: 0.9rem;
+  min-width: 36px;
+  text-align: center;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  align-self: center;
+}
+
+
+
+
+
+
+
+
+/* Input fields */
+input[type="number"],
+input[type="text"],
+input[type="email"] {
+  width: 100%;
+  padding: 0.6rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  margin-top: 0.3rem;
+}
+
+.note {
+  font-size: 0.85rem;
+  color: var(--dark);
+}
+
+/* Results */
+.result-inline {
+  margin-top: 1.25rem;
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--dark);
+}
+
+.cost {
+  color: var(--accent);
+  font-size: 1.5rem;
+}
+
+/* RIGHT SIDE LEAD FORM */
+.lead-form {
+  background: #fff3ec;
+  border: 2px solid var(--accent);
+  border-radius: 10px;
+  padding: 1.2rem 1.5rem;
+  width: 340px;
+  height: auto;
+  align-self: flex-start;
+}
+
+.lead-form h2 {
+  color: var(--dark);
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.lead-form p {
+  font-size: 0.9rem;
+  color: var(--dark);
+  margin-bottom: 1rem;
+}
+
+.lead-form form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.lead-form button {
+  background: var(--accent);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 0.75rem;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 0.5rem;
+  width: 100%;
+}
+
+.lead-form button:hover {
+  background: #e05e19;
+}
+
+.thank-you {
+  color: var(--accent);
+  font-weight: 600;
+  text-align: center;
+}
+
+/* Responsive layout */
+@media (max-width: 768px) {
+  .calculator-layout {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .lead-form {
+    width: 100%;
+    max-width: 420px;
+  }
+}
