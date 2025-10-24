@@ -24,9 +24,32 @@ export default function ProcessCostCalculator() {
     setTotalCost(cost);
   }, [timeUnit, period, processTime, processCount, wage]);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+
+    const payload = {
+      name,
+      email,
+      totalCost,
+      source: "Process Cost Calculator",
+    };
+
+    try {
+      const res = await fetch("/api/send-leads", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      if (!res.ok) {
+        throw new Error("Failed to send lead");
+      }
+
+      setSubmitted(true);
+    } catch (err) {
+      console.error("Submission failed:", err);
+      alert("There was an issue submitting your information. Please try again.");
+    }
   };
 
   return (
@@ -127,6 +150,11 @@ export default function ProcessCostCalculator() {
               <span>(Based on 2023 National Wage Index by the Social Security Administration)</span>
             </p>
             <input type="number" value={wage} onChange={(e) => setWage(Number(e.target.value))} />
+          </div>
+
+          <div className="result-inline">
+            <label>Estimated Cost:</label>
+            <span className="cost">${totalCost?.toFixed(2) ?? '0.00'}</span>
           </div>
         </div>
 
