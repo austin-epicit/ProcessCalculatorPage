@@ -55,23 +55,27 @@ export default function ProcessCostCalculator() {
   return (
     <div className="page-wrapper">
       
-        <div className="header-text">
-          <section className="dark-section">
-            <h1 className="title">PROCESS COST CALCULATOR</h1>
-            <h3>How much is your process costing you?</h3>
-          </section>
-          <p>This tool will help you calculate exactly how much a process is currently costing you.</p>
+      <div className="header-text">
+        <section className="dark-section">
+          <h1 className="title">PROCESS COST CALCULATOR</h1>
+          <h3>How much is your process costing you?</h3>
+        </section>
+
+        <div className="header-content">
+          <p>
+            This tool will help you calculate exactly how much a process is currently costing you.
+          </p>
           <p className="subtext">
-            We can help you reduce your process time substantially. We are experts in automation, integrations, and
-            workflow improvement. Our list continues to grow. Learn more about why optimizing your processes saves both
-            time and money.
+            We can help you reduce your process time substantially. We are experts in automation,
+            integrations, and workflow improvement. Our list continues to grow. Learn more about why
+            optimizing your processes saves both time and money.
           </p>
           <p className="stat">
             Average Annual Hourly Earnings for 2024 = <b>$33.48</b><br />
             <span>(Per US Bureau of Labor Statistics)</span>
           </p>
         </div>
-     
+      </div>
 
       <div className="calculator-layout">
         {/* LEFT SIDE */}

@@ -19,36 +19,52 @@ body {
 /* HEADER */
 /* ============================= */
 .header-text {
-  background-color: var(--dark);
-  color: #ffffff;
-  max-width: 100%;
-  margin: 0;
-  padding: 2.5rem 1rem 2rem;
   text-align: center;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+/* Dark top banner only for title and subtitle */
+.dark-section {
+  background-color: var(--dark);
+  color: #fff;
+  padding: 2.5rem 1rem 2rem;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
-.header-text p {
-  line-height: 1.6;
-  margin: 0.6rem auto;
-  color: rgba(255, 255, 255, 0.9);
+.dark-section h1 {
+  color: var(--accent);
+  margin-bottom: 0.5rem;
 }
 
-.header-text .subtext {
-  max-width: 700px;
-  margin: 0.75rem auto;
-  font-size: 0.95rem;
-  color: rgba(255, 255, 255, 0.85);
-}
-
-.header-text .stat {
-  margin-top: 1.25rem;
-  font-weight: 500;
+.dark-section h3 {
+  font-weight: 400;
   color: #ffffff;
 }
 
-.header-text .stat b { color: #ffffff; }
-.header-text .stat span { color: rgba(255, 255, 255, 0.7); }
+/* White section underneath */
+.header-content {
+  background: #fff;
+  color: var(--dark);
+  padding: 2rem 1rem;
+  line-height: 1.6;
+}
+
+.header-content p {
+  max-width: 700px;
+  margin: 0.75rem auto;
+}
+
+.header-content .subtext {
+  font-size: 0.95rem;
+  color: rgba(0, 0, 0, 0.8);
+}
+
+.header-content .stat {
+  margin-top: 1.25rem;
+  font-weight: 500;
+}
+
 
 /* ============================= */
 /* PAGE LAYOUT */
