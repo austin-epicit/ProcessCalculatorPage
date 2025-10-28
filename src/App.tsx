@@ -54,9 +54,12 @@ export default function ProcessCostCalculator() {
 
   return (
     <div className="page-wrapper">
-      <section className="dark-section">
+      
         <div className="header-text">
-          <h1 className="title">PROCESS COST CALCULATOR</h1>
+          <section className="dark-section">
+            <h1 className="title">PROCESS COST CALCULATOR</h1>
+            <h3>How much is your process costing you?</h3>
+          </section>
           <p>This tool will help you calculate exactly how much a process is currently costing you.</p>
           <p className="subtext">
             We can help you reduce your process time substantially. We are experts in automation, integrations, and
@@ -68,7 +71,7 @@ export default function ProcessCostCalculator() {
             <span>(Per US Bureau of Labor Statistics)</span>
           </p>
         </div>
-      </section>
+     
 
       <div className="calculator-layout">
         {/* LEFT SIDE */}
