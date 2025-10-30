@@ -153,11 +153,10 @@ export default function ProcessCostCalculator() {
             <h2>5. Employee Wage per Hour *</h2>
             <p className="note">
               Average national hourly wage is <b>$33.48</b><br />
-              <span>(Based on 2024 National Wage Index by the Social Security Administration)</span>
+              <span>(Based on 2024 National Wage Index by the US Bureau of Labor Statistics)</span>
             </p>
             <input type="number" value={wage} onChange={(e) => setWage(Number(e.target.value))} />
           </div>
-
         </div>
 
         {/* RIGHT SIDE FORM */}
