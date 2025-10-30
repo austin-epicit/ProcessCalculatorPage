@@ -9,7 +9,7 @@ export default function ProcessCostCalculator() {
   const [period, setPeriod] = useState('Day');
   const [processTime, setProcessTime] = useState(45);
   const [processCount, setProcessCount] = useState(50);
-  const [wage, setWage] = useState(32.03);
+  const [wage, setWage] = useState(33.48);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [submitted, setSubmitted] = useState(false);
@@ -152,8 +152,8 @@ export default function ProcessCostCalculator() {
           <div className="form-group">
             <h2>5. Employee Wage per Hour *</h2>
             <p className="note">
-              Average national hourly wage is <b>$32.05</b><br />
-              <span>(Based on 2023 National Wage Index by the Social Security Administration)</span>
+              Average national hourly wage is <b>$33.48</b><br />
+              <span>(Based on 2024 National Wage Index by the Social Security Administration)</span>
             </p>
             <input type="number" value={wage} onChange={(e) => setWage(Number(e.target.value))} />
           </div>
