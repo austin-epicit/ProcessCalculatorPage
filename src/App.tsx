@@ -14,14 +14,23 @@ export default function ProcessCostCalculator() {
   const [email, setEmail] = useState('');
   const [submitted, setSubmitted] = useState(false);
   const [totalCost, setTotalCost] = useState<number | null>(null);
+  const [totalTime, setTotalTime] = useState<number | null>(null);
 
   useEffect(() => {
     const unitInSeconds = { Seconds: 1, Minutes: 60, Hours: 3600 }[timeUnit] ?? 0;
     const periodInDays = { 'Work Day': 1, Day: 1, 'Work Week': 5, Week: 7, Month: 30, Quarter: 90, Year: 365 }[period] ?? 0;
-    const secondsPerPeriod = processTime * processCount * unitInSeconds * periodInDays;
-    const hours = secondsPerPeriod / 3600;
-    const cost = hours * wage;
-    setTotalCost(cost);
+    // Convert selected period to annualized days
+    const daysPerYear = 365;
+    const periodsPerYear = daysPerYear / periodInDays;
+
+    // total seconds per *year*
+    const secondsPerYear = processTime * processCount * unitInSeconds * periodInDays * periodsPerYear;
+
+    const hoursPerYear = secondsPerYear / 3600;
+    const costPerYear = hoursPerYear * wage;
+
+    setTotalTime(hoursPerYear);
+    setTotalCost(costPerYear);
   }, [timeUnit, period, processTime, processCount, wage]);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -30,7 +39,8 @@ export default function ProcessCostCalculator() {
     const payload = {
       name,
       email,
-      totalCost,
+      totalCost: totalCost ? Math.round(totalCost).toLocaleString() : 0,
+      totalTime: totalTime ? Math.round(totalTime).toLocaleString() : 0,
       source: "Process Cost Calculator",
     };
 
@@ -54,13 +64,11 @@ export default function ProcessCostCalculator() {
 
   return (
     <div className="page-wrapper">
-      
       <div className="header-text">
         <section className="dark-section">
           <h1 className="title">PROCESS COST CALCULATOR</h1>
           <h3>How much is your process costing you?</h3>
         </section>
-
         <div className="header-content">
           <p>
             This tool will help you calculate exactly how much a process is currently costing you.
