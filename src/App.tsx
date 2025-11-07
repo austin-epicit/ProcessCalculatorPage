@@ -16,6 +16,28 @@ export default function ProcessCostCalculator() {
   const [totalCost, setTotalCost] = useState<number | null>(null);
   const [totalTime, setTotalTime] = useState<number | null>(null);
 
+
+    // Auto-resize iframe height
+  useEffect(() => {
+    const resizeIframe = () => {
+      const height = document.documentElement.scrollHeight;
+      window.parent?.postMessage({ type: 'resize-iframe', height }, '*');
+    };
+    // Send initial size
+    resizeIframe();
+    // Resize on window changes
+    window.addEventListener('resize', resizeIframe);
+    // Observe DOM changes (like when form toggles)
+    const observer = new MutationObserver(resizeIframe);
+    observer.observe(document.body, { childList: true, subtree: true, attributes: true });
+    // Cleanup
+    return () => {
+      window.removeEventListener('resize', resizeIframe);
+      observer.disconnect();
+    };
+  }, []);
+
+  // 🧮 Calculator logic
   useEffect(() => {
     const unitInSeconds = { Seconds: 1, Minutes: 60, Hours: 3600 }[timeUnit] ?? 0;
     const periodInDays = { 'Work Day': 1, Day: 1, 'Work Week': 5, Week: 7, Month: 30, Quarter: 90, Year: 365 }[period] ?? 0;
