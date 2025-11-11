@@ -50,20 +50,25 @@ export default function ProcessCostCalculator() {
   }, [timeUnit, period, processTime, processCount, wage]);
 
   useEffect(() => {
-  const isInIframe = window.self !== window.top;
+    const isInIframe = window.self !== window.top;
+    const referrer = document.referrer || "";
+    const currentHost = window.location.hostname;
 
-  const isOnWordPress =
-    window.location.hostname.includes("epicitautodev.wpenginepowered.com") ||
-    window.location.hostname.includes("epicitautomations.com");
+    const isWordPressDomain =
+      currentHost.includes("epicitautodev.wpenginepowered.com") ||
+      currentHost.includes("epicitautomations.com") ||
+      referrer.includes("epicitautodev.wpenginepowered.com") ||
+      referrer.includes("epicitautomations.com");
 
-  if (isInIframe && !isOnWordPress) {
-    console.log("Hiding header:", { isInIframe, isOnWordPress });
-    setShowHeader(false);
-  } else {
-    console.log("Showing header:", { isInIframe, isOnWordPress });
-    setShowHeader(true);
-  }
-}, []);
+    if (isInIframe && !isWordPressDomain) {
+      console.log("Hiding header:", { isInIframe, referrer, currentHost });
+      setShowHeader(false);
+    } else {
+      console.log("Showing header:", { isInIframe, referrer, currentHost });
+      setShowHeader(true);
+    }
+  }, []);
+
 
 
   
