@@ -15,6 +15,7 @@ export default function ProcessCostCalculator() {
   const [submitted, setSubmitted] = useState(false);
   const [totalCost, setTotalCost] = useState<number | null>(null);
   const [totalTime, setTotalTime] = useState<number | null>(null);
+  const [showHeader, setShowHeader] = useState(true);
 
 
     // Auto-resize iframe height
@@ -23,14 +24,11 @@ export default function ProcessCostCalculator() {
       const height = document.documentElement.scrollHeight;
       window.parent?.postMessage({ type: 'resize-iframe', height }, '*');
     };
-    // Send initial size
     resizeIframe();
-    // Resize on window changes
     window.addEventListener('resize', resizeIframe);
     // Observe DOM changes (like when form toggles)
     const observer = new MutationObserver(resizeIframe);
     observer.observe(document.body, { childList: true, subtree: true, attributes: true });
-    // Cleanup
     return () => {
       window.removeEventListener('resize', resizeIframe);
       observer.disconnect();
@@ -41,19 +39,35 @@ export default function ProcessCostCalculator() {
   useEffect(() => {
     const unitInSeconds = { Seconds: 1, Minutes: 60, Hours: 3600 }[timeUnit] ?? 0;
     const periodInDays = { 'Work Day': 1, Day: 1, 'Work Week': 5, Week: 7, Month: 30, Quarter: 90, Year: 365 }[period] ?? 0;
-    // Convert selected period to annualized days
     const daysPerYear = 365;
     const periodsPerYear = daysPerYear / periodInDays;
-
-    // total seconds per *year*
     const secondsPerYear = processTime * processCount * unitInSeconds * periodInDays * periodsPerYear;
-
     const hoursPerYear = secondsPerYear / 3600;
     const costPerYear = hoursPerYear * wage;
 
     setTotalTime(hoursPerYear);
     setTotalCost(costPerYear);
   }, [timeUnit, period, processTime, processCount, wage]);
+
+  useEffect(() => {
+  const isInIframe = window.self !== window.top;
+
+  const isOnWordPress =
+    window.location.hostname.includes("epicitautodev.wpenginepowered.com") ||
+    window.location.hostname.includes("epicitautomations.com");
+
+  const isLocal = window.location.hostname.includes("localhost");
+
+  // Hide ONLY when in iframe and not on WP
+  if ((isInIframe && !isOnWordPress)) {
+    console.log("Hiding header:", { isInIframe, isOnWordPress, isLocal });
+    setShowHeader(false);
+  } else {
+    console.log("Showing header:", { isInIframe, isOnWordPress, isLocal });
+  }
+}, []);
+
+  
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -83,29 +97,31 @@ export default function ProcessCostCalculator() {
       alert("There was an issue submitting your information. Please try again.");
     }
   };
-
+  console.log("Render:", { showHeader });
   return (
     <div className="page-wrapper">
-      <div className="header-text">
-        <section className="dark-section">
-          <h1 className="title">PROCESS COST CALCULATOR</h1>
-          <h3>How much is your process costing you?</h3>
-        </section>
-        <div className="header-content">
-          <p>
-            This tool will help you calculate exactly how much a process is currently costing you.
-          </p>
-          <p className="subtext">
-            We can help you reduce your process time substantially. We are experts in automation,
-            integrations, and workflow improvement. Our list continues to grow. Learn more about why
-            optimizing your processes saves both time and money.
-          </p>
-          <p className="stat">
-            Average Annual Hourly Earnings for 2024 = <b>$33.48</b><br />
-            <span>(Per US Bureau of Labor Statistics)</span>
-          </p>
+      {showHeader && (
+        <div className="header-text">
+          <section className="dark-section">
+            <h1 className="title">PROCESS COST CALCULATOR</h1>
+            <h3>How much is your process costing you?</h3>
+          </section>
+          <div className="header-content">
+            <p>
+              This tool will help you calculate exactly how much a process is currently costing you.
+            </p>
+            <p className="subtext">
+              We can help you reduce your process time substantially. We are experts in automation,
+              integrations, and workflow improvement. Our list continues to grow. Learn more about why
+              optimizing your processes saves both time and money.
+            </p>
+            <p className="stat">
+              Average Annual Hourly Earnings for 2024 = <b>$33.48</b><br />
+              <span>(Per US Bureau of Labor Statistics)</span>
+            </p>
+          </div>
         </div>
-      </div>
+      )}
 
       <div className="calculator-layout">
         {/* LEFT SIDE */}

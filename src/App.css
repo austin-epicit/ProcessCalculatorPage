@@ -334,9 +334,7 @@ input[type="email"] {
 .lead-form button:hover { background: #e05e19; }
 .thank-you { color: var(--accent); font-weight: 600; text-align: center; }
 
-/* ============================= */
 /* RESPONSIVE */
-/* ============================= */
 @media (max-width: 768px) {
   .calculator-layout {
     flex-direction: column;
