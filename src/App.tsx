@@ -56,16 +56,15 @@ export default function ProcessCostCalculator() {
     window.location.hostname.includes("epicitautodev.wpenginepowered.com") ||
     window.location.hostname.includes("epicitautomations.com");
 
-  const isLocal = window.location.hostname.includes("localhost");
-
-  // Hide ONLY when in iframe and not on WP
-  if ((isInIframe && !isOnWordPress)) {
-    console.log("Hiding header:", { isInIframe, isOnWordPress, isLocal });
+  if (isInIframe && !isOnWordPress) {
+    console.log("Hiding header:", { isInIframe, isOnWordPress });
     setShowHeader(false);
   } else {
-    console.log("Showing header:", { isInIframe, isOnWordPress, isLocal });
+    console.log("Showing header:", { isInIframe, isOnWordPress });
+    setShowHeader(true);
   }
 }, []);
+
 
   
 
