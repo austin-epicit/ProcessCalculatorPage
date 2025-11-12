@@ -85,9 +85,21 @@ body {
 .calculator {
   border: none;
   border-radius: 10px;
-  padding: 0rem 1.5rem;
+  padding: 0 1rem; /* equal spacing left/right */
   flex: 1 1 600px;
   min-width: 340px;
+  box-sizing: border-box;
+}
+
+/* Ensure number input doesn’t overflow or hug the edge */
+.calculator input[type="number"] {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.6rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  margin-top: 0.3rem;
 }
 
 .calculator h2 {
@@ -334,15 +346,24 @@ input[type="email"] {
 .lead-form button:hover { background: #e05e19; }
 .thank-you { color: var(--accent); font-weight: 600; text-align: center; }
 
-/* RESPONSIVE */
-@media (max-width: 768px) {
-  .calculator-layout {
-    flex-direction: column;
-    align-items: center;
-  }
+.header-text, .header-content {
+  width: 100%;
+  box-sizing: border-box;
+}
 
-  .lead-form {
-    width: 100%;
-    max-width: 420px;
+/* Banner edge-to-edge flush on desktop */
+.dark-section {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 2.5rem 0 2rem; /* no side padding here */
+}
+
+/* Add padding only on mobile */
+@media (max-width: 768px) {
+  .dark-section {
+    padding: 1.5rem 1rem; /* restore padding for small screens */
+  }
+  .header-content {
+    padding: 1.25rem 1rem;
   }
 }
