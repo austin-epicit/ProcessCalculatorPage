@@ -51,7 +51,6 @@ export default function ProcessCostCalculator() {
   }, [timeUnit, period, processTime, processCount, wage]);
 
   useEffect(() => {
-    const isInIframe = window.self !== window.top;
     const referrer = document.referrer || "";
     const currentHost = window.location.hostname;
 
@@ -61,11 +60,11 @@ export default function ProcessCostCalculator() {
       referrer.includes("epicitautodev.wpenginepowered.com") ||
       referrer.includes("epicitautomations.com");
 
-    if (isInIframe && !isWordPressDomain) {
-      console.log("Hiding header:", { isInIframe, referrer, currentHost });
+    if (!isWordPressDomain) {
+      console.log("Hiding header:", { referrer, currentHost });
       setShowHeader(false);
     } else {
-      console.log("Showing header:", { isInIframe, referrer, currentHost });
+      console.log("Showing header:", { referrer, currentHost });
       setShowHeader(true);
     }
   }, []);
