@@ -51,20 +51,21 @@ export default function ProcessCostCalculator() {
   }, [timeUnit, period, processTime, processCount, wage]);
 
   useEffect(() => {
-    const referrer = document.referrer || "";
+    const referrerHost = new URL(document.referrer || "https://").hostname;
     const currentHost = window.location.hostname;
 
     const isWordPressDomain =
-      currentHost.includes("epicitautodev.wpenginepowered.com") ||
-      currentHost.includes("epicitautomations.com") ||
-      referrer.includes("epicitautodev.wpenginepowered.com") ||
-      referrer.includes("epicitautomations.com");
+      referrerHost === "epicitautomations.com" ||
+      referrerHost === "www.epicitautomations.com" ||
+      currentHost === "epicitautomations.com" ||
+      currentHost === "www.epicitautomations.com";
+
 
     if (!isWordPressDomain) {
-      console.log("Hiding header:", { referrer, currentHost });
+      console.log("Hiding header:", { referrerHost, currentHost });
       setShowHeader(false);
     } else {
-      console.log("Showing header:", { referrer, currentHost });
+      console.log("Showing header:", { referrerHost, currentHost });
       setShowHeader(true);
     }
   }, []);
