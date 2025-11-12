@@ -10,7 +10,8 @@ export default function ProcessCostCalculator() {
   const [processTime, setProcessTime] = useState(45);
   const [processCount, setProcessCount] = useState(50);
   const [wage, setWage] = useState(33.48);
-  const [name, setName] = useState('');
+  const [first, setFirst] = useState('');
+  const [last, setLast] = useState('');
   const [email, setEmail] = useState('');
   const [submitted, setSubmitted] = useState(false);
   const [totalCost, setTotalCost] = useState<number | null>(null);
@@ -69,15 +70,12 @@ export default function ProcessCostCalculator() {
     }
   }, []);
 
-
-
-  
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     const payload = {
-      name,
+      first,
+      last,
       email,
       totalCost: totalCost ? Math.round(totalCost).toLocaleString() : 0,
       totalTime: totalTime ? Math.round(totalTime).toLocaleString() : 0,
@@ -217,9 +215,16 @@ export default function ProcessCostCalculator() {
             <form onSubmit={handleSubmit}>
               <input
                 type="text"
-                placeholder="Name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
+                placeholder="First Name"
+                value={first}
+                onChange={(e) => setFirst(e.target.value)}
+                required
+              />
+              <input
+                type="text"
+                placeholder="Last Name"
+                value={last}
+                onChange={(e) => setLast(e.target.value)}
                 required
               />
               <input
